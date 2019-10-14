@@ -1,4 +1,5 @@
 #Don't track the following file endings
 
-auth.env
 .vscode
+
+*.env
