@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Maps Project</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script type = "text/javascript" src = 'script.js'></script>
   </head>
   <body>
     <script src="script.js"></script>
@@ -19,7 +20,7 @@
       </div>
     
       <div id = "card1">
-        <form class = "form" method = "POST">
+        <form class = "form" method = "POST" function = "newCustomer()">
           <table id = "inner">
             <tr>
               <td>Name:</td>
@@ -42,20 +43,8 @@
         </form>
       </div>
       <div id="map"></div>
-      <script>
-        var map;
-        function initMap() {
-          map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 45.479440, lng: -73.603180},
-            zoom: 16.5
-          });
-          var marker = new google.maps.Marker({
-          position: {lat:45.479440, lng:-73.603180},
-          map: map,
-          title: 'Hello World!' });
-        }
-      </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+      <script type = "text/javascript" src = 'script.js'></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPihJVQcFUe6oGopjRE33tsw_SiEItCtY&callback=initMap" async defer></script>
     </div>
 
       

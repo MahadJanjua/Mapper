@@ -1,0 +1,23 @@
+{
+  "name": "mapper",
+  "version": "1.0.0",
+  "description": "Project by Mahad Janjua \r Software Engineering Student at Concordia University",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MahadJanjua/Mapper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MahadJanjua/Mapper/issues"
+  },
+  "homepage": "https://github.com/MahadJanjua/Mapper#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  }
+}
