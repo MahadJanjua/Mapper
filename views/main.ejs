@@ -25,8 +25,11 @@
       <form class="form" method="POST" function="newCustomer()">
         <table id="inner">
           <tr>
+            <th colspan="2">New Customer Input</th>
+          </tr>
+          <tr>
             <td>Name:</td>
-            <td><input class="input" type="text" required placeholder="First Name"></td>
+            <td><input class="input" type="text" required placeholder="Full Name"></td>
           </tr>
           <tr>
             <td>Phone Number:</td>
@@ -40,6 +43,10 @@
             <td>Months/Credits:</td>
             <td><input class="input" type="number"></td>
           </tr>
+          <tr>
+            <td>Address:</td>
+            <td><input class="input" type='text' placeholder="Address"></td>
+          </tr>
           <tr class="buttons">
             <td align="center" style="padding-top:10px"><input id="button" type="submit"></td>
             <td align="center" style="padding-top:10px"><input id="button" type="reset"></td>
@@ -47,6 +54,24 @@
         </table>
       </form>
     </div>
+
+    <div id="card1">
+      <form class="form" method="POST" function="searchCustomer()">
+        <table id="inner">
+          <tr>
+            <th colspan="2">Customer Search</th>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td><input class="input" type="text" placeholder="Full Name"></td>
+          </tr>
+          <tr>
+            <td>Phone Number:</td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
     <div id="map"></div>
     <script type="text/javascript" src='map.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPihJVQcFUe6oGopjRE33tsw_SiEItCtY&callback=initMap"
