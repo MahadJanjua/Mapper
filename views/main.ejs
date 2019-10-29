@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Maps Project</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src='script.js'></script>
+</head>
+
+<body>
+  <script src="script.js"></script>
+  <div class="bg">
+    <div class="header_topbar">
+      <div class="left_header">
+        <img src="https://www.toornament.com/media/file/1810869368301830144/logo_large?v=1537869101" height="100%">
+      </div>
+      <div class="right_header">
+        <h3 id="Name" align="right" valign="top">MAHAD</h3>
+      </div>
+    </div>
+
+    <div id="card1">
+      <form class="form" method="POST" function="newCustomer()">
+        <table id="inner">
+          <tr>
+            <td>Name:</td>
+            <td><input class="input" type="text" required placeholder="First Name"></td>
+          </tr>
+          <tr>
+            <td>Phone Number:</td>
+            <td><input class="input" type="tel" required placeholder="5145550000"></td>
+          </tr>
+          <tr>
+            <td>Starting Date:</td>
+            <td><input class="input" type="date" required></td>
+          </tr>
+          <tr>
+            <td>Months/Credits:</td>
+            <td><input class="input" type="number"></td>
+          </tr>
+          <tr class="buttons">
+            <td align="center" style="padding-top:10px"><input id="button" type="submit"></td>
+            <td align="center" style="padding-top:10px"><input id="button" type="reset"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div id="map"></div>
+    <script type="text/javascript" src='map.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPihJVQcFUe6oGopjRE33tsw_SiEItCtY&callback=initMap"
+      async defer></script>
+  </div>
+</body>
+
+</html>
