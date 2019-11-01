@@ -5,6 +5,7 @@ var longs = new Array();
 lats = [45.5, 46.5, 47.5]
 longs = [-73, -73, -73]
 function initMap() {
+  
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 45.479440, lng: -73.603180},
     zoom: 16
