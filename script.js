@@ -6,13 +6,23 @@ var app = express();
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// use res.render to load up an ejs view file
-
-// index page 
+// renders the page
 app.get('/', function(req, res) {
     res.render('main');
 });
 
+//Creating GET Router to fetch all the first names of customers from the MySQL Database
+app.get('/first-names' , (req, res) => {
+    connection.query('SELECT latitude FROM customers', (err, result) => {
+        if (err) throw err;
+        else {
+            res.send(result)
+        }
+        console.log(JSON.parse(JSON.stringify(result)))
+    })
+});
+
+// Gives styling and map
 app.use(express.static(__dirname + '/public'));
 
 app.listen(8080);
@@ -25,22 +35,3 @@ const connection = mysql.createConnection({
     password: '',
     database: 'mydatabase'
 });
-
-// Connect
-connection.connect((err) => {
-    if(err) { throw err; }
-    console.log('Connected');
-    connection.query('SELECT firstName FROM customers', (err, result) => {
-      if (err) throw err;
-      console.log(JSON.stringify(result));
-    })
-})
-
-// CREATE ARRAYS HERE AND SEE IF YOU CAN USE GLOBAL VARIABLES TO INSTANTIATE
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// // FUNCTIONS USED BY THE HTML
-// function newCustomer() {
-//     // Information taken from form
-//     // connection.query('INSERT INTO Customers NEWINFOHERE')
-// }
