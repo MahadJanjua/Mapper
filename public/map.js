@@ -1,34 +1,48 @@
 var map;
-var lats = new Array();
-var longs = new Array();
+var today = new Date()
 
-lats = [45.5, 46.5, 47.5]
-longs = [-73, -73, -73]
 function initMap() {
+
+  fetch('http://localhost:8080/latlong').then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 45.479440, lng: -73.703290},
+      zoom: 10
+    })
   
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 45.479440, lng: -73.603180},
-    zoom: 16
+    // LOOP FOR DATABASE MARKERS
+    for (var i = 0; i < data.length; i++) {
+      var dateParts = data[i].endDate.split("-");
+      var jsDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
+      // difference is in ms so divide by 1000 for seconds 
+      if((jsDate - today)/60000 <= 10080) {
+        new google.maps.Marker({
+          position: {lat: data[i].lat, lng: data[i].lng},
+          map: map,
+          title: data[i].firstName + " " + data[i].lastName,
+          icon: { url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" }
+        })
+      }
+      else if ((jsDate - today)/60000 <= 43800) {
+        new google.maps.Marker({
+          position: {lat: data[i].lat, lng: data[i].lng},
+          map: map,
+          title: data[i].firstName + " " + data[i].lastName,
+          icon: { url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png" }
+        })
+      }
+      else {
+        new google.maps.Marker({
+          position: {lat: data[i].lat, lng: data[i].lng},
+          map: map,
+          title: data[i].firstName + " " + data[i].lastName,
+          icon: { url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" }
+        })
+      }
+        
+    }
+  }).catch(function(error) {
+    console.log(error);
   });
-  for (var i = 1; i < 15; i++) { //need to replace distance with number of customers in table
-    new google.maps.Marker({
-        position: {lat: 45+i, lng: -73},
-        map: map,
-        title: 'Loop Marker'
-      })
-  }
-
-  for (var i = 0; i < lats.length; i++) {
-      new google.maps.Marker({
-        position: {lat: lats[i], lng: longs[i]},
-        map: map,
-        title: 'Array Marker',
-        icon: { url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" }
-      })
-  }
-
-  new google.maps.Marker({
-  position: {lat:45.479440, lng:-73.603180},
-  map: map,
-  title: 'Hello World!' });
 }

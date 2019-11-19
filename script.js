@@ -3,6 +3,12 @@ const express = require('express')
 const mysql = require('mysql')
 var app = express();
 
+var names = []
+var lats = []
+var longs = []
+var dates = []
+var counter = 0;
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -12,13 +18,26 @@ app.get('/', function(req, res) {
 });
 
 //Creating GET Router to fetch all the first names of customers from the MySQL Database
-app.get('/first-names' , (req, res) => {
-    connection.query('SELECT latitude FROM customers', (err, result) => {
+app.get('/latlong' , (req, res) => {
+    connection.query('SELECT * FROM customers', (err, result) => {
+        counter = 0
         if (err) throw err;
         else {
             res.send(result)
         }
-        console.log(JSON.parse(JSON.stringify(result)))
+        var latlongs = result
+        for (obj in latlongs) {
+            names[counter] = latlongs[obj].firstName + " " + latlongs[obj].lastName
+            lats[counter] = latlongs[obj].lat
+            longs[counter] = latlongs[obj].lng
+            dates[counter] = latlongs[obj].endDate
+            counter++
+        }
+        console.log(names)
+        console.log(lats)
+        console.log(longs)
+        console.log(dates)
+        return result;
     })
 });
 
@@ -34,4 +53,4 @@ const connection = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'mydatabase'
-});
+})
