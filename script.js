@@ -41,6 +41,12 @@ app.get('/latlong' , (req, res) => {
     })
 });
 
+app.post('/newcustomer', (req, res) => {
+    console.log(req.body)
+    // For some reason the body is empty right now. Need to figure out why the info is not appearing in
+    // request body
+})
+
 // Gives styling and map
 app.use(express.static(__dirname + '/public'));
 

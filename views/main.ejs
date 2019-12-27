@@ -22,30 +22,30 @@
     </div>
 
     <div id="card1">
-      <form class="form" method="POST" function="newCustomer()">
+      <form class="form" method="POST" action="/newcustomer">
         <table id="inner">
           <tr>
             <th colspan="2">New Customer Input</th>
           </tr>
           <tr>
             <td>Name:</td>
-            <td><input class="input" type="text" required placeholder="Full Name"></td>
+            <td><input class="input" id="name" name="name" type="text" required placeholder="Full Name"></td>
           </tr>
           <tr>
             <td>Phone Number:</td>
-            <td><input class="input" type="tel" required placeholder="5145550000"></td>
+            <td><input class="input" id="phoneNumber" name="phoneNumber" type="tel" required placeholder="5145550000"></td>
           </tr>
           <tr>
             <td>Starting Date:</td>
-            <td><input class="input" type="date" required></td>
+            <td><input class="input" id="date" name="date" type="date" required></td>
           </tr>
           <tr>
             <td>Months/Credits:</td>
-            <td><input class="input" type="number"></td>
+            <td><input class="input" id="credits" name="credits" type="number"></td>
           </tr>
           <tr>
             <td>Address:</td>
-            <td><input class="input" type='text' placeholder="Address"></td>
+            <td><input class="input" id="address" name="address" type='text' placeholder="Address"></td>
           </tr>
           <tr class="buttons">
             <td align="center" style="padding-top:10px"><input id="button" type="submit"></td>
@@ -63,7 +63,7 @@
           </tr>
           <tr>
             <td>Name:</td>
-            <td><input class="input" type="text" placeholder="Full Name"></td>
+            <td><input class="input" type="text" placeholder="Name"></td>
           </tr>
           <tr>
             <td>Phone Number:</td>
