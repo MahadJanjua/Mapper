@@ -2,6 +2,7 @@
 const express = require('express')
 const mysql = require('mysql')
 var app = express();
+var bodyParser = require('body-parser')
 
 var names = []
 var lats = []
@@ -27,7 +28,7 @@ app.get('/latlong' , (req, res) => {
         }
         var latlongs = result
         for (obj in latlongs) {
-            names[counter] = latlongs[obj].firstName + " " + latlongs[obj].lastName
+            names[counter] = latlongs[obj].name
             lats[counter] = latlongs[obj].lat
             longs[counter] = latlongs[obj].lng
             dates[counter] = latlongs[obj].endDate
@@ -41,10 +42,30 @@ app.get('/latlong' , (req, res) => {
     })
 });
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded())
+// parse application/json
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.post('/newcustomer', (req, res) => {
-    console.log(req.body)
-    // For some reason the body is empty right now. Need to figure out why the info is not appearing in
-    // request body
+    var name = req.body.name
+    var phoneNumber = req.body.phoneNumber
+    var address = req.body.address
+
+    var endDate = new Date(req.body.date)
+    var credits = req.body.credits
+    var newMonth = endDate.getMonth() + parseInt(credits, 10) // +1 because january is month 0
+    var yearsToAdd = Math.floor(credits/12)
+    endDate.setFullYear(endDate.getFullYear() + yearsToAdd)
+    endDate.setMonth(newMonth % 12)
+    console.log(newMonth)
+    console.log(endDate)
+    // var query = 'INSERT INTO customers (name, phoneNumber, address, endDate) VALUES (' +
+    // name + ', ' +
+    // phoneNumber + ', ' +
+    // address + ', ' +
+    // connection.query()
 })
 
 // Gives styling and map
