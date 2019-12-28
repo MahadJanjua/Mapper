@@ -59,13 +59,20 @@ app.post('/newcustomer', (req, res) => {
     var yearsToAdd = Math.floor(credits/12)
     endDate.setFullYear(endDate.getFullYear() + yearsToAdd)
     endDate.setMonth(newMonth % 12)
-    console.log(newMonth)
-    console.log(endDate)
-    // var query = 'INSERT INTO customers (name, phoneNumber, address, endDate) VALUES (' +
-    // name + ', ' +
-    // phoneNumber + ', ' +
-    // address + ', ' +
-    // connection.query()
+
+    var endDateSql = endDate.getUTCFullYear() + "-" +
+    twoDigits(1 + endDate.getUTCMonth()) + "-" +
+    twoDigits(endDate.getUTCDate()) + " " +
+    twoDigits(endDate.getUTCHours()) + ":" +
+    twoDigits(endDate.getUTCMinutes()) + ":" +
+    twoDigits(endDate.getUTCSeconds())
+    
+    var query = 'INSERT INTO customers (name, phoneNumber, address, endDate) VALUES ("' +
+    name + '", "' +
+    phoneNumber + '", "' +
+    address + '", "' +
+    endDateSql + '")'
+    connection.query(query)
 })
 
 // Gives styling and map
@@ -73,6 +80,12 @@ app.use(express.static(__dirname + '/public'));
 
 app.listen(8080);
 console.log('8080 is the magic port');
+
+function twoDigits(d) {
+    if(0 <= d && d < 10) return "0" + d.toString();
+    if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+    return d.toString();
+}
 
 // Create db connection
 const connection = mysql.createConnection({
