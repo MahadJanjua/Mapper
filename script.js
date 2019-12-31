@@ -3,6 +3,7 @@ const express = require('express')
 const mysql = require('mysql')
 var app = express();
 var bodyParser = require('body-parser')
+var request = require("request");
 
 var names = []
 var lats = []
@@ -65,14 +66,33 @@ app.post('/newcustomer', (req, res) => {
     twoDigits(endDate.getUTCDate()) + " " +
     twoDigits(endDate.getUTCHours()) + ":" +
     twoDigits(endDate.getUTCMinutes()) + ":" +
-    twoDigits(endDate.getUTCSeconds())
-    
-    var query = 'INSERT INTO customers (name, phoneNumber, address, endDate) VALUES ("' +
-    name + '", "' +
-    phoneNumber + '", "' +
-    address + '", "' +
-    endDateSql + '")'
-    connection.query(query)
+    twoDigits(endDate.getUTCSeconds());
+
+    var API_KEY = "AIzaSyDPihJVQcFUe6oGopjRE33tsw_SiEItCtY";
+    var BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+
+    var url = BASE_URL + address + "&key=" + API_KEY;
+    request(url, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var lat = JSON.parse(body).results[0].geometry.location.lat;
+            var long = JSON.parse(body).results[0].geometry.location.lng;
+            var query = 'INSERT INTO customers (name, phoneNumber, address, lat, lng, endDate) VALUES ("' +
+            name + '", "' +
+            phoneNumber + '", "' +
+            address + '", "' +
+            lat + '", "' +
+            long + '", "' +
+            endDateSql + '")'
+            connection.query(query)
+            res.render('main')
+
+        }
+        else {
+            console.log('failed')
+        }
+    })
+
+
 })
 
 // Gives styling and map

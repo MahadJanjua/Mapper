@@ -20,7 +20,7 @@ function initMap() {
         new google.maps.Marker({
           position: {lat: data[i].lat, lng: data[i].lng},
           map: map,
-          title: data[i].firstName + " " + data[i].lastName,
+          title: data[i].name,
           icon: { url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png" }
         })
       }
@@ -28,7 +28,7 @@ function initMap() {
         new google.maps.Marker({
           position: {lat: data[i].lat, lng: data[i].lng},
           map: map,
-          title: data[i].firstName + " " + data[i].lastName,
+          title: data[i].name,
           icon: { url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png" }
         })
       }
@@ -36,7 +36,7 @@ function initMap() {
         new google.maps.Marker({
           position: {lat: data[i].lat, lng: data[i].lng},
           map: map,
-          title: data[i].firstName + " " + data[i].lastName,
+          title: data[i].name,
           icon: { url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png" }
         })
       }
